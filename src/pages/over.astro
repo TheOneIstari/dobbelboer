@@ -1,23 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
-const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
 ---
-<BaseLayout title="Over | Den Dobbelboer" description="Meer over Den Dobbelboer en het idee achter bordspellen huren aan huis.">
-  <section class="container-dobbelboer py-14 md:py-20">
-    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-      <div class="card overflow-hidden">
-        <img src={withBase("/dries.jpeg")} alt="Dries van Den Dobbelboer" class="h-full w-full object-cover" />
-      </div>
-      <div>
-        <p class="mb-2 inline-block border-2 border-black bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">Over ons</p>
-        <h1 class="text-4xl font-black sm:text-5xl">GEEN GROTE KETEN. GEWOON IEMAND DIE GRAAG GOEDE SPELLEN OP TAFEL KRIJGT.</h1>
-        <div class="prose-dobbelboer mt-6 max-w-2xl">
-          <p>Den Dobbelboer is bedacht voor mensen die graag nieuwe bordspellen ontdekken zonder meteen alles te moeten kopen. Minder dozen die stof vangen, meer echte spelavonden.</p>
-          <p>De stijl mag speels zijn, maar het idee erachter is simpel: goede spellen, duidelijk aanbod, levering aan huis, en geen doodsaaie winkelervaring.</p>
-          <p>Deze Astro-versie is ook meteen beter voor SEO, contentbeheer en lange termijn onderhoud. Minder app-gedoe, meer site die gewoon z'n werk doet.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</BaseLayout>
+<meta http-equiv="refresh" content={`0;url=${base}/about`} />

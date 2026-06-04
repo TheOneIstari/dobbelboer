@@ -21,12 +21,12 @@ const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
   <section class="bg-gradient-to-br from-yellow-100 to-orange-100 py-16 md:py-24">
     <div class="container-dobbelboer grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
       <div class="text-center lg:text-left">
-        <p class="mb-4 inline-block border-2 border-black bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">Antwerpen + zondaglevering</p>
+        <p class="mb-4 inline-block border-2 border-black bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">Antwerpen + levering op zondag</p>
         <h1 class="text-4xl font-black leading-none sm:text-5xl md:text-6xl">DEN DOBBELBOER</h1>
-        <h2 class="mt-4 text-2xl font-black leading-tight sm:text-3xl md:text-4xl">VERHUUR BORDSPELLEN & AAN HUIS GELEVERD</h2>
-        <p class="mx-auto mt-6 max-w-2xl text-lg font-bold leading-8 text-slate-700 lg:mx-0">Huur bordspellen vanaf 1 maand. Wij leveren <span class="text-blue-600">iedere zondag in en rond Antwerpen</span> aan huis. Minder miskopen, meer spelavonden.</p>
+        <h2 class="mt-4 text-2xl font-black leading-tight sm:text-3xl md:text-4xl">BOARDGAMES AAN HUIS, ZONDER GEDOE</h2>
+        <p class="mx-auto mt-6 max-w-2xl text-lg font-bold leading-8 text-slate-700 lg:mx-0">Zin in een leuke game night? Huur boardgames vanaf één maand en laat ze gewoon aan huis leveren in en rond Antwerpen.</p>
         <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-          <a href={withBase("/spellen")} class="btn red">BEKIJK SPELLEN</a>
+          <a href={withBase("/boardgames")} class="btn red">BEKIJK BOARDGAMES</a>
           <a href={withBase("/#hoe-werkt-het")} class="btn green">HOE WERKT HET?</a>
         </div>
       </div>
@@ -53,7 +53,7 @@ const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
       <div class="mb-10 flex flex-col items-center gap-4 text-center md:flex-row md:justify-center md:text-left">
         <img src={withBase("/question.png")} alt="Dobbelboer legt uit hoe het werkt" class="w-36 object-contain md:w-48" />
         <div>
-          <p class="mb-2 inline-block border-2 border-black bg-yellow-200 px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">Geen gedoe</p>
+          <p class="mb-2 inline-block border-2 border-black bg-yellow-200 px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">Simpel</p>
           <h2 class="text-3xl font-black leading-tight sm:text-4xl md:text-5xl">HOE WERKT HET?</h2>
         </div>
       </div>
@@ -73,9 +73,9 @@ const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
     <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <p class="mb-2 inline-block border-2 border-black bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">Aanraders</p>
-        <h2 class="text-3xl font-black sm:text-4xl">UITGELICHTE SPELLEN</h2>
+        <h2 class="text-3xl font-black sm:text-4xl">UITGELICHTE BOARDGAMES</h2>
       </div>
-      <a href={withBase("/spellen")} class="btn blue">ALLE SPELLEN</a>
+      <a href={withBase("/boardgames")} class="btn blue">ALLE BOARDGAMES</a>
     </div>
     <div class="grid gap-8 lg:grid-cols-3">
       {games.map((game) => (
@@ -90,7 +90,7 @@ const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
           theme={game.data.theme}
           image={game.data.image}
           imageAlt={game.data.imageAlt}
-          href={withBase(`/spellen/${game.id}`)}
+          href={withBase(`/boardgames/${game.id}`)}
           stock={game.data.stock}
           priceFrom={game.data.priceFrom}
         />
@@ -104,11 +104,11 @@ const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
         <img src={withBase("/dries.jpeg")} alt="Dries achter Den Dobbelboer" class="h-full w-full object-cover" />
       </div>
       <div>
-        <p class="mb-2 inline-block border-2 border-black bg-yellow-200 px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">Over</p>
-        <h2 class="text-3xl font-black sm:text-4xl">LOKAAL, SPEELS EN ZONDER WEBSHOP-GLADHEID</h2>
-        <p class="mt-5 text-lg font-bold leading-8 text-slate-700">Den Dobbelboer is bedoeld voor mensen die graag nieuwe spellen ontdekken zonder meteen een halve kast vol dozen te moeten kopen. Eerder buurtgevoel dan e-commercefabriek.</p>
+        <p class="mb-2 inline-block border-2 border-black bg-yellow-200 px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">About</p>
+        <h2 class="text-3xl font-black sm:text-4xl">EEN EENVOUDIGE MANIER OM LEUKE BOARDGAMES OP TAFEL TE KRIJGEN</h2>
+        <p class="mt-5 text-lg font-bold leading-8 text-slate-700">Den Dobbelboer is er voor mensen die graag nieuwe boardgames ontdekken zonder eerst een hele kast te moeten volstouwen. Gewoon kiezen, laten leveren en spelen.</p>
         <div class="mt-6 flex flex-wrap gap-4">
-          <a href={withBase("/over")} class="btn orange">MEER OVER ONS</a>
+          <a href={withBase("/about")} class="btn orange">ABOUT</a>
           <a href={withBase("/contact")} class="btn purple">CONTACT</a>
         </div>
       </div>
@@ -119,7 +119,7 @@ const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
     <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <p class="mb-2 inline-block border-2 border-black bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.25em]">Nieuws</p>
-        <h2 class="text-3xl font-black sm:text-4xl">NIEUWS & SPELTIPS</h2>
+        <h2 class="text-3xl font-black sm:text-4xl">NIEUWS & TIPS</h2>
       </div>
       <a href={withBase("/nieuws")} class="btn red">ALLE POSTS</a>
     </div>
