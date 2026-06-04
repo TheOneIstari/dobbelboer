@@ -1,9 +1,9 @@
 export const site = {
   name: 'Den Dobbelboer',
   siteUrl: 'https://theoneistari.github.io/dobbelboer',
-  title: 'Den Dobbelboer | Board games huren aan huis in Antwerpen',
+  title: 'Den Dobbelboer | Boardgames huren aan huis in Antwerpen',
   description:
-    'Huur board games vanaf €15 per maand. Den Dobbelboer levert iedere zondag board games aan huis in en rond Antwerpen.',
+    'Huur boardgames vanaf €15 per maand. Den Dobbelboer levert iedere zondag boardgames aan huis in en rond Antwerpen.',
   email: 'hallo@dendobbelboer.be',
   location: 'Antwerpen en omstreken',
 };
