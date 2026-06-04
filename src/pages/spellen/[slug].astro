@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const games = await getCollection('games');
+  return games.map((game) => ({ params: { slug: game.id }, props: { game } }));
+}
+
+const { game } = Astro.props;
+const { Content } = await render(game);
+const available = game.data.stock > 0;
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
+---
+<BaseLayout title={game.data.seoTitle ?? `${game.data.title} | Den Dobbelboer`} description={game.data.seoDescription ?? game.data.summary}>
+  <section class="container-dobbelboer py-14 md:py-20">
+    <div class="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-start">
+      <div class="card overflow-hidden">
+        <img src={withBase(game.data.image)} alt={game.data.imageAlt} class="h-full w-full object-cover" />
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-3">
+          <span class="badge bg-blue-500 text-white">{game.data.category}</span>
+          <span class="badge bg-yellow-300 text-black">{game.data.theme}</span>
+          <span class={`badge ${available ? 'bg-green-500 text-white' : 'bg-slate-300 text-black'}`}>{available ? 'Beschikbaar' : 'Momenteel verhuurd'}</span>
+        </div>
+        <h1 class="mt-5 text-4xl font-black sm:text-5xl">{game.data.title}</h1>
+        <p class="mt-4 text-lg font-bold leading-8 text-slate-700">{game.data.summary}</p>
+        <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div class="card p-4 text-center"><p class="text-xs font-black uppercase">Spelers</p><p class="mt-2 text-base font-black">{game.data.players}</p></div>
+          <div class="card p-4 text-center"><p class="text-xs font-black uppercase">Leeftijd</p><p class="mt-2 text-base font-black">{game.data.age}</p></div>
+          <div class="card p-4 text-center"><p class="text-xs font-black uppercase">Tijd</p><p class="mt-2 text-base font-black">{game.data.playtime}</p></div>
+          <div class="card p-4 text-center"><p class="text-xs font-black uppercase">Complexiteit</p><p class="mt-2 text-base font-black">{game.data.complexity}/5</p></div>
+        </div>
+        <div class="mt-6 card p-5">
+          <p class="text-sm font-black uppercase">Vanaf €{game.data.priceFrom} per maand</p>
+          <p class="mt-2 text-base font-bold leading-7 text-slate-700">Levering in en rond Antwerpen op zondag. Betalen kan bij levering.</p>
+          <div class="mt-4 flex flex-col gap-3 sm:flex-row">
+            <a href={withBase("/contact")} class="btn green">RESERVEER DIT SPEL</a>
+            <a href={withBase("/spellen")} class="btn yellow">TERUG NAAR OVERZICHT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="prose-dobbelboer mt-10 max-w-3xl">
+      <Content />
+    </div>
+  </section>
+</BaseLayout>

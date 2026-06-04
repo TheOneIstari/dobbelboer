@@ -1,0 +1,80 @@
+---
+import '../styles/global.css';
+import { site, nav } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.title, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.siteUrl).toString();
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => path === '/' ? base : `${base}${path}`;
+---
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${site.siteUrl}/dries.jpeg`} />
+  </head>
+  <body class="bg-butter text-ink">
+    <a href="#content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-red-boom focus:px-4 focus:py-2 focus:text-white focus:border-4 focus:border-black">Spring naar inhoud</a>
+    <header class="border-b-4 border-black bg-mustard">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6">
+        <a href={withBase("/")} class="flex items-center gap-3 no-underline">
+          <img src={withBase("/logo.png")} alt="Den Dobbelboer logo" class="h-14 w-14 object-contain md:h-16 md:w-16" />
+          <div>
+            <p class="text-2xl font-black tracking-tight md:text-4xl">DOBBELBOER</p>
+            <p class="text-[11px] font-black tracking-[0.2em] md:text-sm">VERHUUR BORDSPELLEN</p>
+          </div>
+        </a>
+        <nav class="hidden md:block" aria-label="Hoofdnavigatie">
+          <ul class="flex flex-wrap items-center gap-3">
+            {nav.map((item, index) => (
+              <li>
+                <a href={withBase(item.href)} class={`btn ${['red','green','blue','orange','purple','yellow'][index % 6]}`}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <details class="md:hidden">
+          <summary class="btn blue list-none cursor-pointer">MENU</summary>
+          <nav class="absolute right-4 mt-3 w-[min(18rem,calc(100vw-2rem))] border-4 border-black bg-white p-3 shadow-drop" aria-label="Mobiele navigatie">
+            <ul class="grid gap-3">
+              {nav.map((item, index) => (
+                <li>
+                  <a href={withBase(item.href)} class={`btn w-full ${['red','green','blue','orange','purple','yellow'][index % 6]}`}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="content">
+      <slot />
+    </main>
+    <footer class="border-t-4 border-black bg-white py-10">
+      <div class="mx-auto grid max-w-6xl gap-6 px-4 md:grid-cols-2 md:px-6">
+        <div>
+          <p class="text-2xl font-black">DEN DOBBELBOER</p>
+          <p class="mt-2 max-w-xl text-base font-bold text-slate-700">Bordspellen huren aan huis in en rond Antwerpen. Zondag geleverd, zonder saaie webshopvibes.</p>
+        </div>
+        <div class="grid gap-2 md:justify-self-end md:text-right">
+          <p class="font-black">{site.location}</p>
+          <a href={`mailto:${site.email}`} class="font-bold underline">{site.email}</a>
+          <p class="font-bold">© 2026 Den Dobbelboer</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

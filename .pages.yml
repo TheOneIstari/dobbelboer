@@ -1,0 +1,144 @@
+media:
+  - name: images
+    label: Images
+    input: public/uploads
+    output: /uploads
+    categories: [image]
+    extensions: [png, jpg, jpeg, webp, svg]
+    rename: safe
+
+content:
+  - name: games
+    label: Games
+    type: collection
+    path: src/content/games
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    subfolders: false
+    view:
+      primary: title
+      sort: title
+      order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: summary
+        label: Summary
+        type: text
+        required: true
+      - name: players
+        label: Players
+        type: string
+        required: true
+      - name: age
+        label: Age
+        type: string
+        required: true
+      - name: playtime
+        label: Play time
+        type: string
+        required: true
+      - name: complexity
+        label: Complexity
+        type: number
+        required: true
+      - name: category
+        label: Category
+        type: select
+        options:
+          values: [Strategy, Engine-Building, Party, Area Control, Deckbuilding, Puzzle, Drafting]
+      - name: theme
+        label: Theme
+        type: select
+        options:
+          values: [Economic, Science Fiction, Mystery, Fantasy, Historical, Adventure]
+      - name: stock
+        label: Stock
+        type: number
+        required: true
+      - name: featured
+        label: Featured
+        type: boolean
+      - name: image
+        label: Image
+        type: image
+      - name: imageAlt
+        label: Image alt
+        type: string
+      - name: priceFrom
+        label: Price from
+        type: number
+        required: true
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: seoTitle
+        label: SEO title
+        type: string
+      - name: seoDescription
+        label: SEO description
+        type: text
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: news
+    label: News
+    type: collection
+    path: src/content/news
+    format: yaml-frontmatter
+    filename: '{year}-{month}-{day}-{primary}.md'
+    subfolders: false
+    view:
+      primary: title
+      sort: pubDate
+      order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+        required: true
+      - name: pubDate
+        label: Publish date
+        type: date
+        required: true
+      - name: updatedDate
+        label: Updated date
+        type: date
+      - name: image
+        label: Image
+        type: image
+      - name: imageAlt
+        label: Image alt
+        type: string
+      - name: featured
+        label: Featured
+        type: boolean
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: seoTitle
+        label: SEO title
+        type: string
+      - name: seoDescription
+        label: SEO description
+        type: text
+      - name: body
+        label: Body
+        type: rich-text
+
+settings:
+  commit:
+    messages:
+      create: 'content: create {path}'
+      update: 'content: update {path}'
+      delete: 'content: delete {path}'
+      upload: 'media: add {path}'
